@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState, useEffect } from 'react';
+
+const Weather = () => {
+  const [weatherData, setWeatherData] = useState(null);
+
+  useEffect(() => {
+    // Code for fetching data will go here
+    // API key: f67a0d4b7622e1d844dc76f0f9f7be95
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=f67a0d4b7622e1d844dc76f0f9f7be95`)
+      .then(response => response.json())
+      .then(data => setWeatherData(data));
+  }, []);
+
+  //code for displaying data
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {weatherData ? (
+        <div>
+          <h1>{`Temperature: ${weatherData.main.temp}`}</h1>
+          <p>{`Humidity: ${weatherData.main.humidity}%`}</p>
+          <p>{`Highest Temperature: ${weatherData.main.temp_max}`}</p>
+          <p>{`Lowest Temperature: ${weatherData.main.temp_min}`}</p>
+          <p>{`Wind Speed: ${weatherData.wind.speed} km/h`}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default Weather;
