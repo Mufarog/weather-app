@@ -1,33 +1,65 @@
+import React, {useState} from "react"
+import axios from "axios";
 
-import React, { useState, useEffect } from 'react';
 
-const Weather = () => {
-  const [weatherData, setWeatherData] = useState(null);
+function App() {
+  const [data, setData] = useState({});
+  const [location, setLocation] = useState('');
+ const url ='https://api.openweathermap.org/data/2.5/weather?q=london&units=imperial&appid=f67a0d4b7622e1d844dc76f0f9f7be95';  // API URL to get weather data
+ 
 
-  useEffect(() => {
-    // Code for fetching data will go here
-    // API key: f67a0d4b7622e1d844dc76f0f9f7be95
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=f67a0d4b7622e1d844dc76f0f9f7be95`)
-      .then(response => response.json())
-      .then(data => setWeatherData(data));
-  }, []);
+ const searchLocation = (event)  =>{
+if (event.key === 'Enter') {
+  axios.get(url).then((response) => {
+    setData(response.data)
+    console.log(response.data);
+  })
+  setLocation('')
+}
+}
 
-  //code for displaying data
   return (
-    <div>
-      {weatherData ? (
-        <div>
-          <h1>{`Temperature: ${weatherData.main.temp}`}</h1>
-          <p>{`Humidity: ${weatherData.main.humidity}%`}</p>
-          <p>{`Highest Temperature: ${weatherData.main.temp_max}`}</p>
-          <p>{`Lowest Temperature: ${weatherData.main.temp_min}`}</p>
-          <p>{`Wind Speed: ${weatherData.wind.speed} km/h`}</p>
+    <div className="App">
+      <div className="search">
+        <input
+        value={location}
+        onChange={event =>  setLocation(event.target.value)}
+        onKeyPress = {searchLocation}
+         placeholder="Search for a location..." 
+         type='text'/>
+      
+      </div>
+      <div className="container">
+        <div className="top">
+          <div className="Location">
+            <p>{data.name}</p>
+          </div>
+          <div className="temp">
+           {data.main ? <h1>{data.main.temp.toFixed()}°C</h1> : null}
+          </div>
+          <div className="description">
+            {data.weather ? <p>{data.weather[0].main}</p> : null }
+          </div>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+        {data.name != undefined &&
+        <div className="bottom">
+          <div className="feel">
+            {data.main ? <p>{data.main.feels_like.toFixed()}°C</p> : null}
+            <p>Feels Like</p>
+          </div>
+          <div className="humidity">
+            {data.main ? <p className="bold">{data.main.humidity}%</p> : null}
+            <p>Humidity</p>
+          </div>
+        <div className="Wind">
+          {data.wind ? <p className="bold">{data.wind.speed.toFixed()}KM/H</p> :null}
+          <p>Wind Speed</p>
+        </div>
+      </div>
+      }
+    </div>
     </div>
   );
 };
 
-export default Weather;
+export default App;
