@@ -1,10 +1,5 @@
 {
   "name": "weather-app",
-<<<<<<< HEAD
-  "version": "1.0.0",
-  "description": "A weather app built with React and Melsoft API",
-  "main": "index.js",
-=======
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,28 +11,12 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
->>>>>>> origin
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-<<<<<<< HEAD
-  "keywords": [
-    "react",
-    "weather",
-    "app"
-  ],
-  "author": "Your Name",
-  "license": "MIT",
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
-  }
-}
-=======
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -57,4 +36,3 @@
     ]
   }
 }
->>>>>>> origin
