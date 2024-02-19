@@ -60,6 +60,6 @@ if (event.key === 'Enter') {
     </div>
     </div>
   );
-}
+};
 
 export default App;
