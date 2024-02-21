@@ -42,7 +42,7 @@ if (event.key === 'Enter') {
         {data.name !== undefined &&
         <div className="bottom">
           <div className="feel">
-            {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°C</p> : null}
+            {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
             <p>Feels Like</p>
           </div>
           <div className="humidity">
